@@ -1,0 +1,15 @@
+- hosts: servers
+  name: 'Boostrap Ansible Setup'
+  become: true
+  tasks:
+    - name: Create User
+      tags: always
+      # ansible.builtin.user:
+      ansible.builtin.user:
+        name: "{{ ansible_user }}"
+        state: absent
+        remove: true
+        shell: /bin/bash
+        groups: "{{ super_group }}"
+        append: true
+        force: true
